@@ -3,6 +3,8 @@ package day05;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class StoreTest {
@@ -17,21 +19,30 @@ class StoreTest {
     }
 
     @Test
-    void addProduct() {
+    void addProductTest() {
         Product product4 = new Product("fries", Type.SMALL, 80);
         store.addProduct(product4);
         assertEquals(4, store.getProductList().size());
     }
 
     @Test
-    void getProductNumberByType() {
+    void getProductNumberByTypeTest() {
         assertEquals(2, store.getProductNumberByType(Type.BIG));
         assertEquals(0, store.getProductNumberByType(Type.SMALL));
     }
 
     @Test
-   void getProductNumbers() {
+   void getProductNumbersTest() {
       assertEquals("BIG: 2", store.getProductNumbers().get(0));
       assertEquals("SMALL: 0", store.getProductNumbers().get(2));
+  }
+
+  @Test
+    void testNumberOfProductsByOneType(){
+      List<ProductsWithPiece> result = store.numberOfProductsByType();
+
+      assertEquals(2, result.size());
+      assertEquals(Type.BIG,result.get(0).getType());
+      assertEquals(1, result.get(1).getCount());
   }
 }

@@ -33,4 +33,27 @@ public class Store {
         }
         return typesAndNumbers;
     }
+
+    public List<ProductsWithPiece> numberOfProductsByType(){
+        List<ProductsWithPiece> result = new ArrayList<>();
+
+        for (Product actual : productList){
+            ProductsWithPiece productsWithPiece = containsProduct(actual, result);
+            if(productsWithPiece != null){
+                productsWithPiece.incrementCount();
+            } else {
+                result.add(new ProductsWithPiece(actual.getType()));
+            }
+        }
+        return result;
+    }
+
+    public ProductsWithPiece containsProduct(Product actual, List<ProductsWithPiece> productsPieceList) {
+        for (ProductsWithPiece pwp: productsPieceList){
+            if (actual.getType() == pwp.getType()){
+                return pwp;
+            }
+        }
+        return null;
+    }
 }
